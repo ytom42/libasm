@@ -4,7 +4,12 @@ NA		=	nasm
 
 NFLAGS	=	-f elf64
 
-SRCS	=	ft_strlen.s
+SRCS	=	ft_strlen.s \
+			ft_strcpy.s \
+			ft_strcmp.s \
+			ft_write.s \
+			ft_read.s \
+			ft_strdup.s
 
 OBJS	=	$(SRCS:.s=.o)
 
@@ -16,7 +21,7 @@ $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
 %.o:%.s
-	$(NA) $(NFLAGS) $(SRCS)
+	$(NA) $(NFLAGS) $<
 
 clean:
 		rm -f $(OBJS)
@@ -27,4 +32,5 @@ fclean: clean
 re: fclean all
 
 test:re
-	gcc -L. -lasm -o test main.c
+	gcc -L. -o libasm main.c $(OBJS)
+	./libasm

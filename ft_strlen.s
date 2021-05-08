@@ -1,13 +1,11 @@
-section .data
+global ft_strlen
 
 section .text
-	global _ft_strlen
-
-_ft_strlen:
-		mov		rax, -1				; i = -1
-loop:	inc		rax					; i++
+ft_strlen:
+		mov		rax, -1				; i = 0
+loop:
+		inc		rax					; i++
 		mov		cl, byte [rdi+rax]	; cl = str[i]
 		cmp		cl, 0				; if cl == \0
 		jne		loop				; then loop
 		ret
-
